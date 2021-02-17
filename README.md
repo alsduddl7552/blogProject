@@ -39,6 +39,8 @@ framework : spring, bootstrap
 
 project : maven
 
+DB계정 : blog/1111
+
 
 # 제작기간
 
