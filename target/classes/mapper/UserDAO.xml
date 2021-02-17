@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korea.user.beans.UserDAO">
+
+	
+	<select id="userLogin" 
+		resultType="com.korea.user.beans.UserDTO">
+		SELECT *FROM user_table 
+		WHERE user_id= #{param1} AND user_pw= #{param2}
+	</select>
+
+
+	<insert id="userSignUp" flushCache="true"
+		parameterType="com.korea.user.beans.UserDTO">
+		INSERT INTO user_table
+		(user_uid, user_id, user_pw, user_name, user_phone, user_mail)
+		VALUES
+		(SEQ_user_table.nextval, #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_mail})
+	</insert>
+	
+	<select id="idSearch" resultType="String">
+		SELECT user_id FROM user_table
+		WHERE user_name= #{param1} AND user_mail= #{param2}
+	</select>
+	
+	<select id="pwSearch" resultType="String">
+		SELECT user_pw FROM user_table
+		WHERE user_id= #{param1} AND user_name= #{param2}
+	</select>
+
+</mapper>

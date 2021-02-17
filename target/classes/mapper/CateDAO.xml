@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korea.cate.beans.CateDAO">
+	
+	<select id="cateList" resultType="com.korea.cate.beans.CateDTO">
+		SELECT *FROM category_table
+	</select>
+	
+	<insert id="cateCreate">
+		INSERT INTO category_table
+			(cate_uid, cate_name)
+		VALUES
+			(SEQ_category_table.nextval, #{param1})
+	</insert>
+	
+	<update id="cateUpdate">
+		UPDATE category_table SET cate_name = #{param2}
+      	WHERE cate_uid = #{param1}
+	</update>
+	
+	<delete id="cateDelete">
+		DELETE FROM category_table WHERE cate_uid = #{param1}
+	</delete>
+	
+	<delete id="boardDelete">
+		DELETE FROM board_table WHERE cate_uid = #{param1}
+	</delete>
+	
+	<select id="boardTotalList" resultType="com.korea.board.beans.BoardDTO">
+		SELECT * FROM board_table
+	</select>
+	
+</mapper>

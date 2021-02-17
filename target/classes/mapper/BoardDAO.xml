@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.korea.board.beans.BoardDAO">
+	<select id="boardList" resultType="com.korea.board.beans.BoardDTO">
+		SELECT * FROM board_table
+		WHERE cate_uid = #{param1}
+	</select>
+	
+	<insert id="boardCreate" flushCache="true"
+		parameterType="com.korea.board.beans.BoardDTO">
+		INSERT INTO board_table
+		(board_uid, cate_uid, board_title, board_content, board_regdate, board_writer)
+		VALUES
+		(SEQ_board_table.nextval, #{cate_uid}, #{board_title}, #{board_content}, SYSDATE, #{board_writer})
+	</insert>
+	
+	<select id="cateTitle" resultType="String">
+		SELECT cate_name FROM category_table 
+		WHERE cate_uid = #{param1}
+	</select>
+	
+	<select id="boardView" resultType="com.korea.board.beans.BoardDTO">
+		SELECT * FROM board_table
+		WHERE board_uid = #{param1}
+	</select>
+	
+	<delete id="boardDelete" flushCache="true">
+		DELETE FROM board_table WHERE board_uid = #{param1}
+	</delete>
+	
+	<update id="boardUpdate" flushCache="true"
+		parameterType="com.korea.board.beans.BoardDTO">
+		UPDATE board_table SET 
+			board_title = #{dto.board_title}, 
+			board_content = #{dto.board_content}
+      	WHERE board_uid = #{dto.board_uid}
+	</update>
+	
+
+	
+</mapper>
